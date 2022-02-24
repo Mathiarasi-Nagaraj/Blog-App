@@ -1,4 +1,4 @@
-const POST=require('../Models/postModel');
+const POST=require('../Models/Post');
 const post=async (req,res,next)=>
 {  const newPost=new POST(req.body);
     try{

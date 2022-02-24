@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 
 //route connection to app
-const userRoutes=require('./Routes/userRoute')
+const userRoutes=require('./Routes/user')
 const PORT = 8000 || env.PORT;
 app.listen(PORT, () => {
     console.log(`Server is running in port ${PORT}`);

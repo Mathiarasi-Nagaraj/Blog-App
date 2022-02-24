@@ -1,4 +1,4 @@
-const userModel=require('../Models/userModel');
+const userModel=require('../Models/User');
 const bcrypt=require('bcrypt');
 //update user
 const update=async (req,res,next)=>

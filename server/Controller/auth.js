@@ -1,4 +1,4 @@
-const userModel=require('../Models/userModel');
+const userModel=require('../Models/User');
 const bcrypt=require('bcrypt');
 const register=async (req,res,next)=>
 {
@@ -27,7 +27,8 @@ try{
     !user&&res.status(404).json("User not found")
     const validPassword= bcrypt.compare(req.body.password,user.password);
     !validPassword&&res.status(404).json("wrong password")
-   res.status(200).json(user);
+    const{password,...others}=user._doc;
+   res.status(200).json(others);
 }
 catch(err)
 {
