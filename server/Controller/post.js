@@ -9,16 +9,7 @@ const post=async (req,res,next)=>
             console.log(err)
     }
 }
-const get=async (req,res,next)=>
-{
-    try{
-           const posts= await POST.find({userId:req.params.id})
-            res.status(200).json(posts);
-    }catch(err)
-    {
-        console.log(err);
-    }
-}
+
 const update=async (req,res,next)=>
 {
     try{
@@ -51,20 +42,46 @@ const deleteone=async (req,res,next)=>
             console.log(err)
     }
 }
-const like=async (req,res,next)=>
+const getone=async (req,res,next)=>
 {
     try{
-          const currpost=POST.findById(req.params.id)
-          if(currpost.userId===req.body.userId)
-          {
-                  await  currpost.deleteOne();
-                  res.status(200).json("deleted ")
-          }
-          else{
-              res.status(404).json("you cannot delete others post");
-          }
+          const currpost=await POST.findById(req.params.id)
+    
+                  res.status(200).json(currpost)
+          
+         
     }catch(err){
             console.log(err)
     }
 }
-module.exports={post,deleteone,update,like}
+
+const get=async (req,res,next)=>
+{
+    try{
+        const username=req.query.user;
+        const categories=req.query.category;
+        let posts;
+        if(username)
+        {
+            posts=await POST.find({username})
+        }
+        else if(categories)
+        {
+            posts=await POST.find({
+                Category:
+                {
+
+                    $in:[categories]
+                }
+            })
+        }
+        else
+          posts=await POST.find()
+         
+                  res.status(200).json(posts)
+        
+    }catch(err){
+            console.log(err)
+    }
+}
+module.exports={post,deleteone,update,getone,get}

@@ -12,7 +12,7 @@ try{
         email:req.body.email,
         password:hashedPassword
     });
-    const user=await newUser.save();
+    await newUser.save();
     res.status(200).json("user registered ");
 } catch(err)
 {
